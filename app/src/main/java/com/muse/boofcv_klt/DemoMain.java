@@ -14,11 +14,6 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
 
-import org.boofcv.android.fiducials.FiducialCalibrationActivity;
-import org.boofcv.android.fiducials.FiducialImageLibraryAcitivity;
-import org.boofcv.android.fiducials.FiducialSquareBinaryActivity;
-import org.boofcv.android.fiducials.FiducialSquareImageActivity;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
