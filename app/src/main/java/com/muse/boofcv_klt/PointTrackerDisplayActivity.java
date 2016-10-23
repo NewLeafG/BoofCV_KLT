@@ -39,7 +39,7 @@ public class PointTrackerDisplayActivity extends DemoVideoDisplayActivity
 	Paint paintRed = new Paint();
 	Paint paintBlue = new Paint();
 
-	private int mode = 0;
+	protected int mode = 0;
 	Point2D_I32 click0 = new Point2D_I32();
 	Point2D_I32 click1 = new Point2D_I32();
 	Quadrilateral_F64 location = new Quadrilateral_F64();
@@ -59,6 +59,7 @@ public class PointTrackerDisplayActivity extends DemoVideoDisplayActivity
 		paintRed.setStyle(Paint.Style.FILL);
 		paintBlue.setColor(Color.BLUE);
 		paintBlue.setStyle(Paint.Style.FILL);
+		paintBlue.setStrokeWidth(2.f);
 	}
 
 	protected class PointProcessing extends VideoRenderProcessing<GrayU8> {
@@ -189,7 +190,9 @@ public class PointTrackerDisplayActivity extends DemoVideoDisplayActivity
 				imageToOutput(click0.x, click0.y, a);
 				imageToOutput(click1.x, click1.y, b);
 
-				canvas.drawRect((int)a.x,(int)a.y,(int)b.x,(int)b.y,paintBlue);
+				canvas.drawRect((float)a.x,(float)a.y,(float)b.x,(float)b.y,paintBlue);
+//				canvas.drawRect((float)a.x,(float)a.y,(float)b.x,(float)b.y,paintBlue);
+				drawLine(canvas,a,b,paintBlue);
 			} else if( mode >= 2 ) {
 				if( true/*visible*/ ) {
 					Quadrilateral_F64 q = location;

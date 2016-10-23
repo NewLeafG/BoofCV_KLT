@@ -1,8 +1,13 @@
 package com.muse.boofcv_klt;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import boofcv.abst.feature.detect.interest.ConfigGeneralDetector;
 import boofcv.abst.feature.tracker.PointTracker;
@@ -18,10 +23,27 @@ import georegression.struct.point.Point2D_I32;
  */
 public class KltDisplayActivity extends PointTrackerDisplayActivity {
 
+    Spinner spinnerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LayoutInflater inflater = getLayoutInflater();
+        LinearLayout controls = (LinearLayout) inflater.inflate(R.layout.objecttrack_controls, null);
+
+        LinearLayout parent = getViewContent();
+        parent.addView(controls);
+
+//        FrameLayout iv = getViewPreview();
+//        iv.setOnTouchListener(this);
+
+        spinnerView = (Spinner) controls.findViewById(R.id.spinner_algs);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.tracking_objects, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerView.setAdapter(adapter);
+//        spinnerView.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -38,4 +60,7 @@ public class KltDisplayActivity extends PointTrackerDisplayActivity {
         setProcessing(new PointProcessing(tracker));
     }
 
+    public void resetPressed(View view) {
+        mode = 0;
+    }
 }
